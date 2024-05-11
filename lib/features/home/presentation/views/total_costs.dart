@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:printing_costs_2/features/finance/data/models/finance_model.dart';
-import 'package:printing_costs_2/features/materials/data/models/material_model.dart';
 import 'package:printing_costs_2/features/materials/data/models/user_material_model.dart';
 import 'package:printing_costs_2/features/other/data/models/other_model.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
 
@@ -26,11 +24,11 @@ class TotoalCosts{
     }
     double costmumber = 0;
     if (mumber == false) {
-      costmumber = otherO!.cost_gain / 100 ;
+      costmumber = otherO.cost_gain / 100 ;
       debugPrint(costmumber.toString());
     }
-    double cost_risk = otherO!.cost_risk / 100;
-    debugPrint(cost_risk.toString());
+    double costRisk = otherO.cost_risk / 100;
+    debugPrint(costRisk.toString());
     // if(otherO != null){
     //   cost_risk = otherO!.cost_risk;
     // }
@@ -51,12 +49,12 @@ class TotoalCosts{
     debugPrint(total1.toString());
 
 
-    double total = total1 * ( 1+costmumber + cost_risk);///cost_risk * costmumber;///update it to tottal1 * (1+ cost_risk + costmumber) old = total1 * cost_risk * (1+costmumber)
+    double total = total1 * ( 1+costmumber + costRisk); ///cost_risk * costmumber;///update it to tottal1 * (1+ cost_risk + costmumber) old = total1 * cost_risk * (1+costmumber)
     debugPrint("تكلفة نهائية");
     debugPrint(total.toString());
 
 
-    double totalCost = total * financeF!.num;
+    double totalCost = total * financeF.num;
 
     int cost = totalCost.round();
     debugPrint("تكلفة الطباعة");

@@ -6,7 +6,7 @@ import 'package:printing_costs_2/features/materials/data/models/user_material_mo
 abstract class MaterialRepo{
   Future<Either<ServerFailure,List<Materials>>> fetchMaterialList();
   Future<Either<ServerFailure,List<UserMaterials>>> fetchUserMaterialList(int id);
-  Future<Either<ServerFailure,List<UserMaterials>>> updateMaterialList(Map<String,dynamic> data2,int id);
-  Future<Either<ServerFailure,List<UserMaterials>>> deleteMaterialList(int id);
+  Future<Either<ServerFailure,List<UserMaterials>>> updateMaterialList(Map<String,dynamic> data2,int id, int ui);
+  Future<Either<ServerFailure,List<UserMaterials>>> deleteMaterialList(int id, int ui);
   Future<Either<ServerFailure,List<UserMaterials>>> addMaterialList(int id,int userid);
 }

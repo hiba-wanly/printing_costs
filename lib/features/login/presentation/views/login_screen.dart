@@ -5,9 +5,7 @@ import 'package:printing_costs_2/core/widgets/on_preesd.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
 import 'package:printing_costs_2/features/login/presentation/views/box_login.dart';
-import 'package:printing_costs_2/features/login/presentation/views/login_button.dart';
 import 'package:printing_costs_2/splash_screen.dart';
-import 'package:printing_costs_2/splash_view_body.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,8 +18,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordcontroller = new TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
   bool ispassword = true;
   var formkey = GlobalKey<FormState>();
   double h = 0;
@@ -30,11 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    this.h = MediaQuery
+    h = MediaQuery
         .of(context)
         .size
         .height;
-    this.w = MediaQuery
+    w = MediaQuery
         .of(context)
         .size
         .width;
@@ -86,14 +84,14 @@ class _LoginScreenState extends State<LoginScreen> {
                      listener: (context, state) {
                        if (state is LoginSuccess) {
                          widget.repository.login = state.login;
-                         // Navigator.push(
-                         //     context,
-                         //     MaterialPageRoute(
-                         //         builder: (context) =>
+                         Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                                 builder: (context) =>
                                      LoadFinance(
                                        repository: widget.repository,
-                             //         )
-                             // )
+                                     )
+                             )
                          );
                        }
                        if(state is LoginFailure){
@@ -106,20 +104,20 @@ class _LoginScreenState extends State<LoginScreen> {
                      return Container(
                        width: double.infinity,
                        height: h * 0.06,
-
-                       child: Align(
-                           alignment: Alignment.center,
-                           child: CircularProgressIndicator()
-                       ),
                        decoration: BoxDecoration(
                            borderRadius: BorderRadius.circular(5),
-                           gradient: LinearGradient(
+                           gradient: const LinearGradient(
                              colors: [Colors.lightBlueAccent, Colors.deepPurple],
                              begin: Alignment.bottomLeft,
                              end: Alignment.topRight,
                              stops: [0.2, 0.8],
                              tileMode: TileMode.repeated,
                            )),
+
+                       child: const Align(
+                           alignment: Alignment.center,
+                           child: CircularProgressIndicator()
+                       ),
                      );
                    }
                    else {

@@ -15,7 +15,7 @@ class FinanceRemoteDataSourceImpl extends FinanceRemoteDataSource{
   @override
   Future<Finance> fetchFinanceNum(int id) async{
     print("SSSSSS");
-    var data = await apiService.get(endPoint: 'finance/getuserfinance/${id}');
+    var data = await apiService.get(endPoint: 'finance/getuserfinance/$id');
     Finance nums = getNumsList(data);
     saveFinanceData(nums, kFinanceBox);
     return nums;
@@ -23,7 +23,7 @@ class FinanceRemoteDataSourceImpl extends FinanceRemoteDataSource{
 
   @override
   Future<Finance> updateFinanceNum(int id,Map<String,dynamic> data1, int userId) async{
-    var data = await apiService.post(endPoint: 'finance/addORupdate/${userId}', data1: data1);
+    var data = await apiService.post(endPoint: 'finance/addORupdate/$userId', data1: data1);
     Finance nums = getNumsList(data);
     updateFinanceData(nums, kFinanceBox);
     return nums;

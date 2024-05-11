@@ -17,3 +17,15 @@ class LoginSuccess extends LoginState{
   final Login login;
   LoginSuccess(this.login);
 }
+
+class ImageLoading extends LoginState{}
+
+class ImageFailure extends LoginState{
+  final String errMessage;
+  ImageFailure(this.errMessage);
+}
+
+class ImageSuccess extends LoginState{
+  final Login login;
+  ImageSuccess(this.login);
+}

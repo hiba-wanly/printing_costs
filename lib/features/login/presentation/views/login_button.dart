@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:printing_costs_2/constants.dart';
 import 'package:printing_costs_2/core/widgets/on_preesd.dart';
-import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
 import 'package:printing_costs_2/splash_view_body.dart';
@@ -21,11 +19,11 @@ class loginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    this.h = MediaQuery
+    h = MediaQuery
         .of(context)
         .size
         .height;
-    this.w = MediaQuery
+    w = MediaQuery
         .of(context)
         .size
         .width;
@@ -48,20 +46,20 @@ class loginButton extends StatelessWidget {
         return Container(
           width: double.infinity,
           height: h * 0.06,
-
-          child: Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator()
-          ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [Colors.lightBlueAccent, Colors.deepPurple],
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
                 stops: [0.2, 0.8],
                 tileMode: TileMode.repeated,
               )),
+
+          child: const Align(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator()
+          ),
         );
       }
       else {

@@ -4,7 +4,6 @@ import 'package:printing_costs_2/core/widgets/app_bar.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/printer_cubit.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/printer_state.dart';
@@ -47,7 +46,7 @@ class _PrintersViewState extends State<PrintersView> {
                       left: w * 0.01, right: w * 0.01, top: h * 0.01,bottom: h * 0.01),
                   itemCount: printers!.length,
                   shrinkWrap: true,
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   itemBuilder: (BuildContext context,int index)=>
                       Column(
                         children: [
@@ -70,7 +69,7 @@ class _PrintersViewState extends State<PrintersView> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         TEXT(text: "الطابعة : " ,w:w*0.035),
-                                        TEXT(text:printers![index].printer_name! +"   ",w:w*0.04),
+                                        TEXT(text:"${printers![index].printer_name!}   ",w:w*0.04),
                                         // TEXT(text:printers![index].preparation_cost!,w:w*0.03),
                                       ],
                                     ),
@@ -85,6 +84,14 @@ class _PrintersViewState extends State<PrintersView> {
                                                   widget.repository.userprinters = state.printer;
                                                 });
                                                 widget.repository.userprinters = state.printer;
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => StartScreen(
+                                                      repository: widget.repository,
+                                                    ),
+                                                  ),
+                                                );
                                                 // return Navigator.of(context).pop();
                                                 // StartScreen(
                                                 //   repository: widget.repository,
@@ -107,40 +114,40 @@ class _PrintersViewState extends State<PrintersView> {
                                                 return Container(
                                                   width: double.infinity,
                                                   height: h * 0.06,
-
-                                                  child: Align(
-                                                      alignment: Alignment.center,
-                                                      child: CircularProgressIndicator()),
                                                   decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(5),
-                                                      gradient: LinearGradient(
+                                                      gradient: const LinearGradient(
                                                         colors: [Colors.lightBlueAccent, Colors.deepPurple],
                                                         begin: Alignment.bottomLeft,
                                                         end: Alignment.topRight,
                                                         stops: [0.2, 0.8],
                                                         tileMode: TileMode.repeated,
                                                       )),
+
+                                                  child: const Align(
+                                                      alignment: Alignment.center,
+                                                      child: CircularProgressIndicator()),
                                                 );
                                               }else{
                                                 return GestureDetector(
                                                   onTap: () {
-                                                    BlocProvider.of<PrintersCubit>(context).deletePrinterList(printers![index].id);
+                                                    BlocProvider.of<PrintersCubit>(context).deletePrinterList(printers![index].id,widget.repository.login!.id);
                                                   },
                                                   child: Container(
                                                     width: double.infinity,
                                                     height: h * 0.06,
-                                                    child: Align(
-                                                        alignment: Alignment.center,
-                                                        child: TEXT(text:"حذف",w: w * 0.035)),
                                                     decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(5),
-                                                        gradient: LinearGradient(
+                                                        gradient: const LinearGradient(
                                                           colors: [Colors.blue, Colors.deepPurple],
                                                           begin: Alignment.bottomLeft,
                                                           end: Alignment.topRight,
                                                           stops: [0.2, 0.8],
                                                           tileMode: TileMode.repeated,
                                                         )),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: TEXT(text:"حذف",w: w * 0.035)),
                                                   ),
                                                 );
                                               }
@@ -168,18 +175,18 @@ class _PrintersViewState extends State<PrintersView> {
                                             child: Container(
                                               width: double.infinity,
                                               height: h * 0.06,
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: TEXT(text:"تعديل",w: w * 0.035)),
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(5),
-                                                  gradient: LinearGradient(
+                                                  gradient: const LinearGradient(
                                                     colors: [Colors.blue, Colors.deepPurple],
                                                     begin: Alignment.bottomLeft,
                                                     end: Alignment.topRight,
                                                     stops: [0.2, 0.8],
                                                     tileMode: TileMode.repeated,
                                                   )),
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: TEXT(text:"تعديل",w: w * 0.035)),
                                             ),
                                           ),
                                         ),
@@ -213,10 +220,10 @@ class _PrintersViewState extends State<PrintersView> {
             ),
           );
         },
-        child: Icon(
+        backgroundColor: const Color(0xff4f8ea8),
+        child: const Icon(
             Icons.add
         ),
-        backgroundColor: Color(0xff4f8ea8),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:printing_costs_2/constants.dart';
 import 'package:printing_costs_2/core/utils/api_service.dart';
@@ -240,9 +239,7 @@ class MyApp extends StatelessWidget {
           AppRouter.kLogin: (context) => LoginScreen(repository: repository),
         },
         theme: ThemeData(
-          backgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+          useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple).copyWith(background: Colors.white),
         ),
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),

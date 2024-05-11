@@ -38,6 +38,7 @@ class BoxController2 extends StatelessWidget {
           if (value!.isEmpty) {
             return '';
           }
+          return null;
         },
         // maxLines: 1,
         decoration: InputDecoration(

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:printing_costs_2/constants.dart';
 import 'package:printing_costs_2/core/utils/api_service.dart';
@@ -18,6 +17,7 @@ class LoginRemoteDataSourceImpl extends LoginRemoteDataSource{
 
   @override
   Future<Login> fetchLoginData(Map<String, dynamic> data2) async{
+    debugPrint("okokokoko");
     var data = await apiService.post(data1: data2, endPoint: 'auth/login/');
     debugPrint("WEAREHERE12121212121222");
     debugPrint(data.toString());
@@ -30,7 +30,7 @@ class LoginRemoteDataSourceImpl extends LoginRemoteDataSource{
 
   @override
   Future<Login> changeImage(dynamic id,Map<String,dynamic> data1) async{
-    var data = await apiService.post(data1: data1, endPoint: 'auth/photo/${id}');
+    var data = await apiService.post(data1: data1, endPoint: 'auth/photo/$id');
     Login nums = getLogin(data);
     saveLoginData(nums, kLoginBox);
     return nums;

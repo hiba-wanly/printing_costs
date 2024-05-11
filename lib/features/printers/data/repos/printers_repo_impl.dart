@@ -31,11 +31,11 @@ class PrintersRepoImpl extends PrinterRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<UserPrinters>>> updatePrinterList(Map<String, dynamic> data2, int id) async{
+  Future<Either<ServerFailure, List<UserPrinters>>> updatePrinterList(Map<String, dynamic> data2, int id,int ui) async{
     try {
       print("KKKKKKKKK");
       List<UserPrinters> nums;
-      nums= await printersRemoteDataSource.updatePrinterList(id, data2 );
+      nums= await printersRemoteDataSource.updatePrinterList(id, data2 ,ui);
       return right(nums);
     }   catch (e) {
       if(e is DioError){
@@ -61,11 +61,11 @@ class PrintersRepoImpl extends PrinterRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<UserPrinters>>> deletePrinterList(int id)async {
+  Future<Either<ServerFailure, List<UserPrinters>>> deletePrinterList(int id,int ui)async {
     try {
       print("KKKKKKKKK");
       List<UserPrinters> nums;
-      nums= await printersRemoteDataSource.deletePrinterList( id );
+      nums= await printersRemoteDataSource.deletePrinterList( id,ui );
       return right(nums);
     }   catch (e) {
       if(e is DioError){

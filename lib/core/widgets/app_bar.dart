@@ -19,7 +19,7 @@ class APPBAR extends StatelessWidget implements PreferredSizeWidget{
             fontFamily: Almarai,
             fontSize: w* 0.06,
             color: Colors.black,
-            shadows: <Shadow>[
+            shadows: const <Shadow>[
               Shadow(
                 offset: Offset(0.1, 0.1),
                 blurRadius: 3.0,
@@ -43,7 +43,7 @@ class APPBAR extends StatelessWidget implements PreferredSizeWidget{
           children: [
             ClayContainer(
               emboss: true,
-              color: Color(0xFFF2F2F2),
+              color: const Color(0xFFF2F2F2),
               borderRadius: 50,
               // decoration: BoxDecoration(
               //   borderRadius: BorderRadius.circular(25),

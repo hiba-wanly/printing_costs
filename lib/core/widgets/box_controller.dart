@@ -30,7 +30,7 @@ class BoxController extends StatelessWidget {
           debugPrint(val);
         },
         validator: (value) {
-          if(value!.isEmpty || value == null){
+          if(value!.isEmpty){
             return "الحقل مطلوب";
           }
           return null;
@@ -38,11 +38,11 @@ class BoxController extends StatelessWidget {
         cursorHeight: 0,
         cursorWidth: 0,
         maxLines: 1,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           filled: true,
           fillColor: Colors.white,
           // hoverColor: greybox,
-          contentPadding:const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          contentPadding:EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.black),
           ),

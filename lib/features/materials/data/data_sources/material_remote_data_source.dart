@@ -9,9 +9,9 @@ import 'package:printing_costs_2/features/materials/data/models/user_material_mo
 abstract class MaterialRemoteDataSource{
   Future<List<Materials>> fetchMaterialList();
   Future<List<UserMaterials>> fetchUserMaterialList(int id);
-  Future<List<UserMaterials>> updateMaterialList(dynamic id,Map<String,dynamic> data1) ;
+  Future<List<UserMaterials>> updateMaterialList(dynamic id,Map<String,dynamic> data1, int ui) ;
   Future<List<UserMaterials>> addMaterialList(int id,int userid) ;
-  Future<List<UserMaterials>> deleteMaterialList(dynamic id) ;
+  Future<List<UserMaterials>> deleteMaterialList(dynamic id, int ui) ;
 }
 
 class MaterialRemoteDataSourceImpl extends MaterialRemoteDataSource{
@@ -28,15 +28,15 @@ class MaterialRemoteDataSourceImpl extends MaterialRemoteDataSource{
 
   @override
   Future<List<UserMaterials>> fetchUserMaterialList(int id) async{
-    var data = await apiService.get(endPoint: 'usermaterial/getAll/${id}');
+    var data = await apiService.get(endPoint: 'usermaterial/getAll/$id');
     List<UserMaterials> nums = getUserMaterialList(data);
     saveUserMaterialsData(nums, kUserMaterialBox);
     return nums;
   }
 
   @override
-  Future<List<UserMaterials>> updateMaterialList(dynamic id,Map<String,dynamic> data1) async{
-    var data = await apiService.update(endPoint: 'usermaterial/update/${id}',data: data1);
+  Future<List<UserMaterials>> updateMaterialList(dynamic id,Map<String,dynamic> data1, int ui) async{
+    var data = await apiService.update(endPoint: 'usermaterial/update/$id/$ui',data: data1);
     List<UserMaterials> nums = getUserMaterialList(data);
     updateUserMaterialData(nums, kUserMaterialBox);
     return nums;
@@ -45,7 +45,7 @@ class MaterialRemoteDataSourceImpl extends MaterialRemoteDataSource{
   @override
   Future<List<UserMaterials>> addMaterialList(int id,int userid) async{
     debugPrint("M1");
-    var data = await apiService.post(endPoint: 'usermaterial/add/${id}/${userid}',data1: {});
+    var data = await apiService.post(endPoint: 'usermaterial/add/$id/$userid',data1: {});
     debugPrint("M2");
     debugPrint(data.toString());
     List<UserMaterials> nums = getUserMaterialList(data);
@@ -54,8 +54,8 @@ class MaterialRemoteDataSourceImpl extends MaterialRemoteDataSource{
   }
 
   @override
-  Future<List<UserMaterials>> deleteMaterialList(dynamic id) async {
-    var data = await apiService.delete(endPoint: 'usermaterial/delete/${id}');
+  Future<List<UserMaterials>> deleteMaterialList(dynamic id, int ui) async {
+    var data = await apiService.delete(endPoint: 'usermaterial/delete/$id/$ui');
     List<UserMaterials> nums = getUserMaterialList(data);
     updateUserMaterialData(nums, kUserMaterialBox);
     return nums;

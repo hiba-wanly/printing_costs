@@ -50,11 +50,11 @@ class MaterialRepoImpl extends MaterialRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<UserMaterials>>> updateMaterialList(Map<String, dynamic> data2, int id) async{
+  Future<Either<ServerFailure, List<UserMaterials>>> updateMaterialList(Map<String, dynamic> data2, int id, int ui) async{
     try {
       print("KKKKKKKKK");
       List<UserMaterials> nums;
-      nums= await materialRemoteDataSource.updateMaterialList(id, data2 );
+      nums= await materialRemoteDataSource.updateMaterialList(id, data2 ,ui);
       return right(nums);
     }   catch (e) {
       if(e is DioError){
@@ -80,11 +80,11 @@ class MaterialRepoImpl extends MaterialRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<UserMaterials>>> deleteMaterialList(int id)async {
+  Future<Either<ServerFailure, List<UserMaterials>>> deleteMaterialList(int id, int ui)async {
     try {
       print("DELETEEEE");
       List<UserMaterials> nums;
-      nums= await materialRemoteDataSource.deleteMaterialList( id );
+      nums= await materialRemoteDataSource.deleteMaterialList( id ,ui);
       return right(nums);
     }   catch (e) {
       if(e is DioError){

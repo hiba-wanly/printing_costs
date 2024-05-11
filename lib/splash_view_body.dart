@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:printing_costs_2/core/utils/app_router.dart';
-import 'package:printing_costs_2/core/utils/assets.dart';
-import 'package:printing_costs_2/features/home/presentation/views/home_view.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
 
@@ -38,12 +34,12 @@ with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Image.asset(AssetsData.image1),
-          const SizedBox(
+          SizedBox(
             height: 4,
           ),
           // SlidingText(slidingAnimation: slidingAnimation),

@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
 import 'package:printing_costs_2/core/widgets/on_preesd.dart';
+import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
-import 'package:printing_costs_2/splash_view_body.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
 class ChangeImage extends StatefulWidget {
   Repository repository;
@@ -52,21 +52,21 @@ class _ChangeImageState extends State<ChangeImage> {
        // mainAxisAlignment: MainAxisAlignment.center,
       // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           height: h * 0.15,
           width: w * 0.3,
           child: MaterialButton(
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onPressed: (){
               showDialog(context: context, builder: (BuildContext context){
                 return AlertDialog(
-                  title: Text(
+                  title: const Text(
                     'إضافة او تعديل الصورة',
                   ),
                   content: Container(height :150,color: Colors.white,child:
                   Column(children: [
                     Container(color:Colors.blue,child: ListTile(leading: const Icon(Icons.image),
-                      title: Text(
+                      title: const Text(
                         'المعرض',
                       ),onTap: ()
                       {
@@ -75,7 +75,7 @@ class _ChangeImageState extends State<ChangeImage> {
                       },),),
                     const SizedBox(height: 30,),
                     Container(color: Colors.blue,child: ListTile(leading: const Icon(Icons.add_a_photo),
-                      title: Text(
+                      title: const Text(
                         'الكاميرا',
                       ),onTap: (){
                         getImage(ImageSource.camera);
@@ -91,7 +91,7 @@ class _ChangeImageState extends State<ChangeImage> {
         //   child:
     BlocConsumer<LoginCubit, LoginState>(
     listener: (context, state) {
-    if (state is LoginSuccess) {
+    if (state is ImageSuccess) {
       // setState(() {
         widget.repository.login= state.login;
       // });
@@ -100,38 +100,49 @@ class _ChangeImageState extends State<ChangeImage> {
     context,
     MaterialPageRoute(
     builder: (context) =>
-    SplashViewbody(
+        StartScreen(
     repository: widget.repository,
     )
     )
     );
     }
+    if(state is ImageFailure){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  StartScreen(
+                    repository: widget.repository,
+                  )
+          )
+      );
+    }
     }, builder: (context, state) {
-    if (state is LoginLoading) {
+    if (state is ImageLoading) {
     return Container(
     width: double.infinity,
     height: h * 0.06,
-
-    child: Align(
-    alignment: Alignment.center,
-    child: CircularProgressIndicator()
-    ),
     decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(5),
-    gradient: LinearGradient(
+    gradient: const LinearGradient(
     colors: [Colors.lightBlueAccent, Colors.deepPurple],
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
     stops: [0.2, 0.8],
     tileMode: TileMode.repeated,
     )),
+
+    child: const Align(
+    alignment: Alignment.center,
+    child: CircularProgressIndicator()
+    ),
     );
     }
     else {
     return
     InkWell(
     onTap: () {
-    BlocProvider.of<LoginCubit>(context).changeImage(image,23);},
+    BlocProvider.of<LoginCubit>(context).changeImage(image,widget.repository.login!.id);},
     child:ONPreesd(h:h,w:w,string: "تعديل",)
     );
     }

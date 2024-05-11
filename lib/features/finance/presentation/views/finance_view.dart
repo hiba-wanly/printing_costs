@@ -19,7 +19,7 @@ class FinanceView extends StatefulWidget {
 
 class _FinanceViewState extends State<FinanceView>  {
 
-  TextEditingController financeController = new TextEditingController();
+  TextEditingController financeController = TextEditingController();
 
   Finance? finance;
 
@@ -81,19 +81,19 @@ class _FinanceViewState extends State<FinanceView>  {
                       return Container(
                         width: double.infinity,
                         height: h * 0.06,
-
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator()),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [Colors.lightBlueAccent, Colors.deepPurple],
                               begin: Alignment.bottomLeft,
                               end: Alignment.topRight,
                               stops: [0.2, 0.8],
                               tileMode: TileMode.repeated,
                             )),
+
+                        child: const Align(
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator()),
                       );
                     }
                     else {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 
 @immutable

@@ -26,8 +26,8 @@ class Other{
   Map<String,dynamic> toJson(){
     return {
       // "id" : this.id,
-      "gain" : this.cost_gain,
-      "risk" : this.cost_risk
+      "gain" : cost_gain,
+      "risk" : cost_risk
     };
   }
 

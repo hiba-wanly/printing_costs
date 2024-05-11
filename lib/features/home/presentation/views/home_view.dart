@@ -1,13 +1,5 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:printing_costs_2/core/utils/app_router.dart';
-import 'package:printing_costs_2/core/widgets/box_controller.dart';
-import 'package:printing_costs_2/core/widgets/text_style.dart';
-import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
-import 'package:printing_costs_2/features/home/presentation/views/total_costs.dart';
 import 'package:printing_costs_2/features/materials/data/models/material_model.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_cubit.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_state.dart';
@@ -55,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
               } else if (state is PrinterListFailure) {
                 return Text(state.errMessage);
               } else {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
             },
           );
@@ -67,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
         } else if (state is MaterialListFailure) {
           return Text(state.errMessage);
         } else {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );

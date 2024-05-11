@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/features/printers/domain/use_cases/fetch_printer_use_case.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/user_printer_state.dart';
 

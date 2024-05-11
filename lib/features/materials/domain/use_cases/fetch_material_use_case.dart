@@ -22,13 +22,13 @@ class FetchMaterialUseCase extends UseCase<List<Materials>,NoParam> {
   }
 
   @override
-  Future<Either<Failure, List<Materials>>> callDelete(int id, [NoParam? param]) {
+  Future<Either<Failure, List<Materials>>> callDelete(int id, int ui, [NoParam? param]) {
     // TODO: implement callDelete
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, List<Materials>>> callUpdate(Map<String, dynamic> data2, int id, [NoParam? param]) {
+  Future<Either<Failure, List<Materials>>> callUpdate(Map<String, dynamic> data2, int id, int ui, [NoParam? param]) {
     // TODO: implement callUpdate
     throw UnimplementedError();
   }
@@ -53,12 +53,12 @@ class FetchUserMaterialUseCase extends UseCase<List<UserMaterials>,NoParam> {
   }
 
   @override
-  Future<Either<Failure, List<UserMaterials>>> callUpdate(Map<String,dynamic> data2,int id,[NoParam? param]) async{
-    return await materialRepo.updateMaterialList(data2, id);
+  Future<Either<Failure, List<UserMaterials>>> callUpdate(Map<String,dynamic> data2,int id, int ui,[NoParam? param]) async{
+    return await materialRepo.updateMaterialList(data2, id,ui);
   }
   @override
-  Future<Either<Failure, List<UserMaterials>>> callDelete(int id,[NoParam? param]) async{
-    return await materialRepo.deleteMaterialList( id);
+  Future<Either<Failure, List<UserMaterials>>> callDelete(int id, int ui,[NoParam? param]) async{
+    return await materialRepo.deleteMaterialList( id,ui);
   }
   @override
   Future<Either<Failure, List<UserMaterials>>> callAdd(int id, int userid,[NoParam? param]) async{

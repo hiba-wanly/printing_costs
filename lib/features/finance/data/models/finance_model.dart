@@ -13,8 +13,8 @@ class Finance {
 
   Map<String,dynamic> toJson(){
     return {
-      "id" : this.id,
-      "coins" : this.num
+      "id" : id,
+      "coins" : num
     };
   }
 

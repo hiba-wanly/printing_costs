@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 String Almarai = 'Almarai';
 dynamic serverurl = 30;
 const kFinanceBox = 'finance_box';
@@ -9,4 +8,4 @@ const kLoginBox = 'login_box';
 const kUserMaterialBox = 'user_material_box';
 const kUserPrinterBox = 'user_printer_box';
 
-String baseUrl = 'http://192.168.1.110:8000/media/';
+String baseUrl = 'http://192.168.43.59:8000/media/';

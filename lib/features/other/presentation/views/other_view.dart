@@ -19,10 +19,10 @@ class OtherView extends StatefulWidget {
 }
 
 class _OtherViewState extends State<OtherView> {
-  TextEditingController gainController = new TextEditingController();
+  TextEditingController gainController = TextEditingController();
 
 
-  TextEditingController riskController = new TextEditingController();
+  TextEditingController riskController = TextEditingController();
 
   Other? other;
  late Other other2 ;
@@ -65,7 +65,7 @@ class _OtherViewState extends State<OtherView> {
                 ),
                 Row(
                   children: [
-                    Expanded(child: TEXT(text:"المخاطر  x ",w:w*0.04)),
+                    Expanded(child: TEXT(text:"المخاطر  % ",w:w*0.04)),
                     Expanded(
                       flex: 3,
                       child: BoxController2(
@@ -109,19 +109,19 @@ class _OtherViewState extends State<OtherView> {
               return Container(
                 width: double.infinity,
                 height: h * 0.06,
-
-                child: Align(
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator()),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [Colors.lightBlueAccent, Colors.deepPurple],
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
                       stops: [0.2, 0.8],
                       tileMode: TileMode.repeated,
                     )),
+
+                child: const Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator()),
               );
             }
             else {

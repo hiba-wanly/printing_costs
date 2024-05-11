@@ -5,7 +5,6 @@ import 'package:printing_costs_2/core/widgets/box_controller_2.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/printer_cubit.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/printer_state.dart';
@@ -21,17 +20,17 @@ class UpdatePrinter extends StatefulWidget {
 
 class _UpdatePrinterState extends State<UpdatePrinter>  {
 
-  TextEditingController name_Controller = new TextEditingController();
-  TextEditingController p_c_Controller = new TextEditingController();
-  TextEditingController s_u_c_Controller = new TextEditingController();
-  TextEditingController p_w_a_t_Controller = new TextEditingController();
-  TextEditingController d_i_h_Controller = new TextEditingController();
-  TextEditingController i_a_b_w_Controller = new TextEditingController();
-  TextEditingController k_o_Controller = new TextEditingController();
-  TextEditingController e_c_Controller = new TextEditingController();
-  TextEditingController s_m_Controller = new TextEditingController();
-  TextEditingController t_c_Controller = new TextEditingController();
-  TextEditingController s_c_Controller = new TextEditingController();
+  TextEditingController name_Controller = TextEditingController();
+  TextEditingController p_c_Controller = TextEditingController();
+  TextEditingController s_u_c_Controller = TextEditingController();
+  TextEditingController p_w_a_t_Controller = TextEditingController();
+  TextEditingController d_i_h_Controller = TextEditingController();
+  TextEditingController i_a_b_w_Controller = TextEditingController();
+  TextEditingController k_o_Controller = TextEditingController();
+  TextEditingController e_c_Controller = TextEditingController();
+  TextEditingController s_m_Controller = TextEditingController();
+  TextEditingController t_c_Controller = TextEditingController();
+  TextEditingController s_c_Controller = TextEditingController();
 
 
 
@@ -59,7 +58,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: name_Controller,
-                label :widget.printers != null ? widget.printers!.printer_name.toString() : "",
+                label :widget.printers != null ? widget.printers.printer_name.toString() : "",
                 textInputType:   TextInputType.text,
                 h:  h,
                 w:  w,
@@ -73,7 +72,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: p_c_Controller,
-                label : widget.printers != null ? widget.printers!.preparation_cost.toString() : "",
+                label : widget.printers != null ? widget.printers.preparation_cost.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -87,7 +86,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: s_u_c_Controller,
-                label : widget.printers != null ? widget.printers!.start_up_cost.toString() : "",
+                label : widget.printers != null ? widget.printers.start_up_cost.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -100,7 +99,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: p_w_a_t_Controller,
-                label : widget.printers != null ? widget.printers!.Printer_wear_and_tear.toString() : "",
+                label : widget.printers != null ? widget.printers.Printer_wear_and_tear.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -114,7 +113,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: d_i_h_Controller,
-                label : widget.printers != null ? widget.printers!.depreciation_in_hours.toString() : "",
+                label : widget.printers != null ? widget.printers.depreciation_in_hours.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -128,7 +127,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: i_a_b_w_Controller,
-                label :widget.printers != null ? widget.printers!.inverter_and_battery_wear.toString() : "",
+                label :widget.printers != null ? widget.printers.inverter_and_battery_wear.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -142,7 +141,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: k_o_Controller,
-                label : widget.printers != null ? widget.printers!.kilowatts_old.toString() : "",
+                label : widget.printers != null ? widget.printers.kilowatts_old.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -156,7 +155,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: e_c_Controller,
-                label : widget.printers != null ? widget.printers!.Electricity_courier.toString() : "",
+                label : widget.printers != null ? widget.printers.Electricity_courier.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -170,7 +169,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: s_m_Controller,
-                label :widget.printers != null ? widget.printers!.Single_material.toString() : "",
+                label :widget.printers != null ? widget.printers.Single_material.toString() : "",
                 textInputType:   TextInputType.text,
                 h:  h,
                 w:  w,
@@ -184,7 +183,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: t_c_Controller,
-                label : widget.printers != null ? widget.printers!.Termination_costs.toString() : "",
+                label : widget.printers != null ? widget.printers.Termination_costs.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -198,7 +197,7 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
               ),
               BoxController2(
                 controller: s_c_Controller,
-                label : widget.printers != null ? widget.printers!.Supervision_costs.toString() : "",
+                label : widget.printers != null ? widget.printers.Supervision_costs.toString() : "",
                 textInputType:   TextInputType.number,
                 h:  h,
                 w:  w,
@@ -254,6 +253,14 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
                 listener: (context,state){
                   if (state is PrinterUserListSuccess) {
                     widget.repository.userprinters = state.printer;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StartScreen(
+                          repository: widget.repository,
+                        ),
+                      ),
+                    );
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
@@ -284,19 +291,19 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
                     return Container(
                       width: double.infinity,
                       height: h * 0.06,
-
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator()),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [Colors.lightBlueAccent, Colors.deepPurple],
                             begin: Alignment.bottomLeft,
                             end: Alignment.topRight,
                             stops: [0.2, 0.8],
                             tileMode: TileMode.repeated,
                           )),
+
+                      child: const Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator()),
                     );
                   }else{
                     return GestureDetector(
@@ -315,18 +322,15 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
                               Supervision_costs: s_c_Controller != null ? s_c_Controller.text : widget.printers.Supervision_costs,
 
                           );
-                          BlocProvider.of<PrintersCubit>(context).updatePrinterList(printer,widget.printers.id);
+                          BlocProvider.of<PrintersCubit>(context).updatePrinterList(printer,widget.printers.id,widget.repository.login!.id);
 
                       },
                       child: Container(
                         width: double.infinity,
                         height: h * 0.06,
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: TEXT(text:"تعديل",w: w * 0.035)),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [Colors.blue, Colors.deepPurple],
                             begin: Alignment.bottomLeft,
                             end: Alignment.topRight,
@@ -334,6 +338,9 @@ class _UpdatePrinterState extends State<UpdatePrinter>  {
                             tileMode: TileMode.repeated,
                           ),
                         ),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: TEXT(text:"تعديل",w: w * 0.035)),
                       ),
                     );
                   }

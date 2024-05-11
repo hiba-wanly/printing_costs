@@ -11,19 +11,19 @@ class ONPreesd extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: h * 0.06,
-
-      child: Align(
-          alignment: Alignment.center,
-          child: TEXT(w : w * 0.035, text: string,)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [Colors.lightBlueAccent, Colors.deepPurple],
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
             stops: [0.2, 0.8],
             tileMode: TileMode.repeated,
           )),
+
+      child: Align(
+          alignment: Alignment.center,
+          child: TEXT(w : w * 0.035, text: string,)),
     );
   }
 }

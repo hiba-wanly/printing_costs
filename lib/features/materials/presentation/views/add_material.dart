@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
-import 'package:printing_costs_2/core/widgets/box_controller_2.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
 import 'package:printing_costs_2/features/materials/data/models/material_model.dart';
-import 'package:printing_costs_2/features/materials/data/models/user_material_model.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_cubit.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_state.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
@@ -20,10 +18,10 @@ class AddMaterial extends StatefulWidget {
 
 class _AddMaterialState extends State<AddMaterial> {
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController unitController = new TextEditingController();
-  TextEditingController priceController = new TextEditingController();
-  TextEditingController numController = new TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController unitController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController numController = TextEditingController();
 
   var formkey = GlobalKey<FormState>();
 
@@ -56,7 +54,7 @@ class _AddMaterialState extends State<AddMaterial> {
                       left: w * 0.01, right: w * 0.01, top: h * 0.01,bottom: h * 0.01),
                   itemCount: materials!.length,
                   shrinkWrap: true,
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   itemBuilder: (BuildContext context,int index)=>
                       Column(
                         children: [
@@ -82,7 +80,7 @@ class _AddMaterialState extends State<AddMaterial> {
 
                                         TEXT(text:materials![index].brand! +"   ",w:w*0.04),
                                         TEXT(text:materials![index].color! +"   ",w:w*0.04),
-                                        TEXT(text:materials![index].material! +"   ",w:w*0.04),
+                                        TEXT(text:"${materials![index].material!}   ",w:w*0.04),
 
                                       ],
                                     ),
@@ -122,11 +120,20 @@ class _AddMaterialState extends State<AddMaterial> {
                                               widget.repository.usermaterials = state.material;
                                             });
                                             widget.repository.usermaterials = state.material;
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => StartScreen(
+                                                  repository: widget.repository,
+                                                ),
+                                              ),
+                                            );
                                             // return Navigator.of(context).pop();
                                             // StartScreen(
                                             //   repository: widget.repository,
                                             // );
                                           } else if (state is MaterialListFailure) {
+                                            FlashBAR(message: state.errMessage,h: h,context1: context,);
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -136,7 +143,7 @@ class _AddMaterialState extends State<AddMaterial> {
                                               ),
                                             );
                                             // Navigator.of(context).pop();
-                                            FlashBAR(message: state.errMessage,h: h,context1: context,);
+
                                           }
                                         },
                                         builder: (context,state){
@@ -144,19 +151,19 @@ class _AddMaterialState extends State<AddMaterial> {
                                             return Container(
                                               width: double.infinity,
                                               height: h * 0.06,
-
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: CircularProgressIndicator()),
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(5),
-                                                  gradient: LinearGradient(
+                                                  gradient: const LinearGradient(
                                                     colors: [Colors.lightBlueAccent, Colors.deepPurple],
                                                     begin: Alignment.bottomLeft,
                                                     end: Alignment.topRight,
                                                     stops: [0.2, 0.8],
                                                     tileMode: TileMode.repeated,
                                                   )),
+
+                                              child: const Align(
+                                                  alignment: Alignment.center,
+                                                  child: CircularProgressIndicator()),
                                             );
                                           }else{
                                             return GestureDetector(
@@ -166,18 +173,18 @@ class _AddMaterialState extends State<AddMaterial> {
                                               child: Container(
                                                 width: double.infinity,
                                                 height: h * 0.06,
-                                                child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: TEXT(text:"إضافة",w: w * 0.035)),
                                                 decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(5),
-                                                    gradient: LinearGradient(
+                                                    gradient: const LinearGradient(
                                                       colors: [Colors.blue, Colors.deepPurple],
                                                       begin: Alignment.bottomLeft,
                                                       end: Alignment.topRight,
                                                       stops: [0.2, 0.8],
                                                       tileMode: TileMode.repeated,
                                                     )),
+                                                child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: TEXT(text:"إضافة",w: w * 0.035)),
                                               ),
                                             );
                                           }

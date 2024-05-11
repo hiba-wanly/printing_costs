@@ -49,18 +49,18 @@ class _BoxLoginState extends State<BoxLogin> {
         decoration: InputDecoration(
           // hintTextDirection: TextDirection.rtl,
 
-            floatingLabelStyle: TextStyle(color: Colors.blue),
-            border: UnderlineInputBorder(
+            floatingLabelStyle: const TextStyle(color: Colors.blue),
+            border: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
             label: Text(widget.label,
               style: TextStyle(
                 fontFamily: Almarai,
               ),),
-            contentPadding: EdgeInsets.only(bottom: 0),
+            contentPadding: const EdgeInsets.only(bottom: 0),
             suffixIcon: widget.pass
                 ? IconButton(
                 onPressed: () {

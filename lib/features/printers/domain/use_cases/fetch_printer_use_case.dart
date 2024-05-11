@@ -22,13 +22,13 @@ class FetchPrintersUseCase extends UseCase<List<Printers>,NoParam> {
   }
 
   @override
-  Future<Either<Failure, List<Printers>>> callDelete(int id, [NoParam? param]) {
+  Future<Either<Failure, List<Printers>>> callDelete(int id,int ui, [NoParam? param]) {
     // TODO: implement callDelete
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, List<Printers>>> callUpdate(Map<String, dynamic> data2, int id, [NoParam? param]) {
+  Future<Either<Failure, List<Printers>>> callUpdate(Map<String, dynamic> data2, int id,int ui, [NoParam? param]) {
     // TODO: implement callUpdate
     throw UnimplementedError();
   }
@@ -46,12 +46,12 @@ class FetchUserPrintersUseCase extends UseCase<List<UserPrinters>,NoParam> {
   FetchUserPrintersUseCase(this.printerRepo);
 
   @override
-  Future<Either<Failure, List<UserPrinters>>> callUpdate(Map<String,dynamic> data2,int id,[NoParam? param]) async{
-    return await printerRepo.updatePrinterList(data2, id);
+  Future<Either<Failure, List<UserPrinters>>> callUpdate(Map<String,dynamic> data2,int id,int ui,[NoParam? param]) async{
+    return await printerRepo.updatePrinterList(data2, id,ui);
   }
   @override
-  Future<Either<Failure, List<UserPrinters>>> callDelete(int id,[NoParam? param]) async{
-    return await printerRepo.deletePrinterList( id);
+  Future<Either<Failure, List<UserPrinters>>> callDelete(int id,int ui,[NoParam? param]) async{
+    return await printerRepo.deletePrinterList( id,ui);
   }
   @override
   Future<Either<Failure, List<UserPrinters>>> callAdd(int id, int userid,[NoParam? param]) async{

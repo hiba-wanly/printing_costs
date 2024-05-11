@@ -15,10 +15,8 @@ class HomeRepoImpl extends HomeRepo {
     try {
       Home nums;
       nums=await homeRemoteDataSource.fetchHome(data2);
-      if(nums != null){
-        return right(nums);
-      }
-      return left(ServerFailure(nums.toString()));
+      return right(nums);
+          return left(ServerFailure(nums.toString()));
     }   catch (e) {
       if(e is DioError){
         return left(ServerFailure.fromDioError(e));

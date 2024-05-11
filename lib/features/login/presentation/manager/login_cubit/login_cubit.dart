@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:printing_costs_2/features/login/data/models/login_model.dart';
 import 'package:printing_costs_2/features/login/domain/use_case/fetch_login_use_case.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
 
@@ -44,17 +43,17 @@ class LoginCubit extends Cubit<LoginState>{
   }
 
   Future<void> changeImage(File log, int id) async{
-    emit(LoginLoading());
+    emit(ImageLoading());
     Map<String,dynamic> data2 = {
-      'logo': await MultipartFile.fromFile(log!.path),
+      'logo': await MultipartFile.fromFile(log.path),
     };
     var result = await  fetchLoginUseCase.callImage(data2, id);
 
     result.fold((failure) {
 
-      emit(LoginFailure(failure.message));
+      emit(ImageFailure(failure.message));
     }, (login) {
-      emit(LoginSuccess(login));
+      emit(ImageSuccess(login));
     });
   }
 

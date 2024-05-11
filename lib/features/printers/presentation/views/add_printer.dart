@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
-import 'package:printing_costs_2/core/widgets/box_controller_2.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
@@ -19,17 +18,17 @@ class AddPrinters extends StatefulWidget {
 
 class _AddPrintersState extends State<AddPrinters>  {
 
-  TextEditingController name_Controller = new TextEditingController();
-  TextEditingController p_c_Controller = new TextEditingController();
-  TextEditingController s_u_c_Controller = new TextEditingController();
-  TextEditingController p_w_a_t_Controller = new TextEditingController();
-  TextEditingController d_i_h_Controller = new TextEditingController();
-  TextEditingController i_a_b_w_Controller = new TextEditingController();
-  TextEditingController k_o_Controller = new TextEditingController();
-  TextEditingController e_c_Controller = new TextEditingController();
-  TextEditingController s_m_Controller = new TextEditingController();
-  TextEditingController t_c_Controller = new TextEditingController();
-  TextEditingController s_c_Controller = new TextEditingController();
+  TextEditingController name_Controller = TextEditingController();
+  TextEditingController p_c_Controller = TextEditingController();
+  TextEditingController s_u_c_Controller = TextEditingController();
+  TextEditingController p_w_a_t_Controller = TextEditingController();
+  TextEditingController d_i_h_Controller = TextEditingController();
+  TextEditingController i_a_b_w_Controller = TextEditingController();
+  TextEditingController k_o_Controller = TextEditingController();
+  TextEditingController e_c_Controller = TextEditingController();
+  TextEditingController s_m_Controller = TextEditingController();
+  TextEditingController t_c_Controller = TextEditingController();
+  TextEditingController s_c_Controller = TextEditingController();
 
 
   var formkey = GlobalKey<FormState>();
@@ -62,7 +61,7 @@ class _AddPrintersState extends State<AddPrinters>  {
                       left: w * 0.01, right: w * 0.01, top: h * 0.01,bottom: h * 0.01),
                   itemCount: printers!.length,
                   shrinkWrap: true,
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   itemBuilder: (BuildContext context,int index)=>
                       Column(
                         children: [
@@ -85,7 +84,7 @@ class _AddPrintersState extends State<AddPrinters>  {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         TEXT(text: "الطابعة : " ,w:w*0.035),
-                                        TEXT(text:printers![index].printer_name! +"   ",w:w*0.04),
+                                        TEXT(text:"${printers![index].printer_name!}   ",w:w*0.04),
                                         // TEXT(text:printers![index].preparation_cost!,w:w*0.03),
                                       ],
                                     ),
@@ -93,10 +92,28 @@ class _AddPrintersState extends State<AddPrinters>  {
                                      BlocConsumer<PrintersCubit,PrinterListState>(
                                         listener: (context,state){
                                           if (state is PrinterUserListSuccess) {
-                                            setState(() {
-                                              widget.repository.userprinters = state.printer;
-                                            });
+                                            // setState(() {
+                                            //   widget.repository.userprinters = state.printer;
+                                            // });
                                             widget.repository.userprinters = state.printer;
+                                            FlashBAR(message: "تمت اضافة الطابعة",h: h, context1: context,);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => StartScreen(
+                                                  repository: widget.repository,
+                                                ),
+                                              ),
+                                            );
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => PrintersView(
+                                            //       repository: widget.repository,
+                                            //     ),
+                                            //   ),
+                                            // );
+                                            // Navigator.pop(context);
                                             // return Navigator.of(context).pop();
                                             // StartScreen(
                                             //   repository: widget.repository,
@@ -119,19 +136,19 @@ class _AddPrintersState extends State<AddPrinters>  {
                                             return Container(
                                               width: double.infinity,
                                               height: h * 0.06,
-
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: CircularProgressIndicator()),
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(5),
-                                                  gradient: LinearGradient(
+                                                  gradient: const LinearGradient(
                                                     colors: [Colors.lightBlueAccent, Colors.deepPurple],
                                                     begin: Alignment.bottomLeft,
                                                     end: Alignment.topRight,
                                                     stops: [0.2, 0.8],
                                                     tileMode: TileMode.repeated,
                                                   )),
+
+                                              child: const Align(
+                                                  alignment: Alignment.center,
+                                                  child: CircularProgressIndicator()),
                                             );
                                           }else{
                                             return GestureDetector(
@@ -141,18 +158,18 @@ class _AddPrintersState extends State<AddPrinters>  {
                                               child: Container(
                                                 width: double.infinity,
                                                 height: h * 0.06,
-                                                child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: TEXT(text:"إضافة",w: w * 0.035)),
                                                 decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(5),
-                                                    gradient: LinearGradient(
+                                                    gradient: const LinearGradient(
                                                       colors: [Colors.blue, Colors.deepPurple],
                                                       begin: Alignment.bottomLeft,
                                                       end: Alignment.topRight,
                                                       stops: [0.2, 0.8],
                                                       tileMode: TileMode.repeated,
                                                     )),
+                                                child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: TEXT(text:"إضافة",w: w * 0.035)),
                                               ),
                                             );
                                           }

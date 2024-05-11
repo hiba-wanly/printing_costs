@@ -1,16 +1,11 @@
-import 'dart:io';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:printing_costs_2/core/utils/app_router.dart';
 import 'package:printing_costs_2/core/utils/assets.dart';
 import 'package:printing_costs_2/core/widgets/box_controller.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
-import 'package:printing_costs_2/core/widgets/on_preesd.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/finance/presentation/views/finance_view.dart';
 import 'package:printing_costs_2/features/home/data/models/home.dart';
@@ -19,15 +14,15 @@ import 'package:printing_costs_2/features/home/presentation/manager/home_cubit/h
 import 'package:printing_costs_2/features/home/presentation/views/total_costs.dart';
 import 'package:printing_costs_2/features/login/data/models/login_model.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:printing_costs_2/features/materials/data/models/material_model.dart';
+import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
 import 'package:printing_costs_2/features/materials/data/models/user_material_model.dart';
 import 'package:printing_costs_2/features/materials/presentation/views/material_view.dart';
 import 'package:printing_costs_2/features/other/presentation/views/other_view.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/features/printers/presentation/views/printers_view.dart';
 import 'package:printing_costs_2/features/setting/pesentations/views/change_image.dart';
 import 'package:printing_costs_2/features/setting/pesentations/views/setting_view.dart';
+import 'package:printing_costs_2/splash_screen.dart';
 import 'package:printing_costs_2/srevices/repository.dart';
 
 
@@ -51,14 +46,14 @@ class _StartScreenState extends State<StartScreen>
   var orderTypeList;
 
   List<String> OrderList = [
-    "عرض فاتورة",
-    "عرض سعر"
+    "فاتورة",
+    " سعر"
   ];
 
-  TextEditingController sizeController = new TextEditingController();
-  TextEditingController timeController = new TextEditingController();
-  TextEditingController projectController = new TextEditingController();
-  TextEditingController personController = new TextEditingController();
+  TextEditingController sizeController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController projectController = TextEditingController();
+  TextEditingController personController = TextEditingController();
 
 
   late Home home;
@@ -188,7 +183,7 @@ class _StartScreenState extends State<StartScreen>
                       // login!.imagepath! != null ?
                       FadeInImage(
                         image:  NetworkImage(login!.imagepath!,),
-                        placeholder: AssetImage(AssetsData.image2),
+                        placeholder: const AssetImage(AssetsData.image2),
                         imageErrorBuilder:  (context, error, stackTrace){
                           return Image.asset(AssetsData.image2);
                         },
@@ -234,7 +229,7 @@ class _StartScreenState extends State<StartScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width * 0.6,
                         height: MediaQuery.of(context).size.height * 0.05,
                         // margin: const EdgeInsets.all(10),
@@ -280,7 +275,7 @@ class _StartScreenState extends State<StartScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width * 0.6,
                         height: MediaQuery.of(context).size.height * 0.05,
                         // margin: const EdgeInsets.all(10),
@@ -361,24 +356,24 @@ class _StartScreenState extends State<StartScreen>
                           return Container(
                             width: double.infinity,
                             height: h * 0.06,
-
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: CircularProgressIndicator()
-                            ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [Colors.lightBlueAccent, Colors.deepPurple],
                                   begin: Alignment.bottomLeft,
                                   end: Alignment.topRight,
                                   stops: [0.2, 0.8],
                                   tileMode: TileMode.repeated,
                                 )),
+
+                            child: const Align(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator()
+                            ),
                           );
                         }
                         else {
-                          return  Container(
+                          return  SizedBox(
                             width: MediaQuery.of(context).size.width ,
                             height: MediaQuery.of(context).size.height * 0.05,
                             // margin: const EdgeInsets.all(10),
@@ -408,10 +403,10 @@ class _StartScreenState extends State<StartScreen>
                                       date: formattedDate.toString(),
                                       total_price: totalcost11,
                                       finance: widget.repository.finance!.num,
-                                      supervisor: widget.repository!.check1! ,
-                                      membership: widget.repository!.check2!,
-                                      gain: widget.repository!.other!.cost_gain,
-                                      risk: widget.repository!.other!.cost_risk,
+                                      supervisor: widget.repository.check1! ,
+                                      membership: widget.repository.check2!,
+                                      gain: widget.repository.other!.cost_gain,
+                                      risk: widget.repository.other!.cost_risk,
                                     );
                                     BlocProvider.of<HomeCubit>(context).fetchHome(home);
                                     debugPrint(selectedOrder);
@@ -491,7 +486,7 @@ class _StartScreenState extends State<StartScreen>
                     widget.repository.login!.imagepath! != null ?
                 FadeInImage(
                 image:  NetworkImage(widget.repository.login!.imagepath!,),
-              placeholder: AssetImage(AssetsData.image2),
+              placeholder: const AssetImage(AssetsData.image2),
               imageErrorBuilder:  (context, error, stackTrace){
                 return Image.asset(AssetsData.image2);
               },
@@ -592,6 +587,31 @@ class _StartScreenState extends State<StartScreen>
                   ),
                 );
               },
+            ),
+            BlocConsumer<LoginCubit, LoginState>(
+              listener: (context, state){
+                if (state is LoginSuccess){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SplashScreen(
+                        repository: widget.repository,
+                      ),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state){
+                return ListTile(
+                  // title: TEXT(text:"تسجيل خروج",w: w * 0.035),
+                  leading: const Icon(Icons.logout),
+                  onTap: () {
+                    // GoRouter.of(context).push(AppRouter.kFinance);
+                    BlocProvider.of<LoginCubit>(context).logout(widget.repository.login!.id);
+
+                  },
+                );
+              }
             ),
             // ListTile(
             //   title: TEXT(text:"Change File",w: w * 0.035),

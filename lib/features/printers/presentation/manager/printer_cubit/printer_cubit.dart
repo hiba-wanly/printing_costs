@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:printing_costs_2/features/printers/data/model/printer_model.dart';
 import 'package:printing_costs_2/features/printers/data/model/user_printer_model.dart';
 import 'package:printing_costs_2/features/printers/domain/use_cases/fetch_printer_use_case.dart';
 import 'package:printing_costs_2/features/printers/presentation/manager/printer_cubit/printer_state.dart';
@@ -40,10 +39,10 @@ class PrintersCubit extends Cubit<PrinterListState>{
   //
   // }
 
-  Future<void> updatePrinterList(UserPrinters materials, int id) async{
+  Future<void> updatePrinterList(UserPrinters materials, int id,int ui) async{
     emit(PrinterListLoading());
     Map<String,dynamic> data2 = materials.toJson();
-    var result = await  fetchUserPrintersUseCase.callUpdate(data2, id);
+    var result = await  fetchUserPrintersUseCase.callUpdate(data2, id,ui);
 
     result.fold((failure) {
 
@@ -53,9 +52,9 @@ class PrintersCubit extends Cubit<PrinterListState>{
     });
   }
 
-  Future<void> deletePrinterList( int id) async{
+  Future<void> deletePrinterList( int id,int ui) async{
     emit(PrinterListLoading());
-    var result = await  fetchUserPrintersUseCase.callDelete( id);
+    var result = await  fetchUserPrintersUseCase.callDelete( id,ui);
 
     result.fold((failure) {
 

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/features/finance/presentation/manager/finance_cubit/finance_cubit.dart';
 import 'package:printing_costs_2/features/finance/presentation/manager/finance_cubit/finance_state.dart';
-import 'package:printing_costs_2/features/home/presentation/views/home_view.dart';
-import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:printing_costs_2/features/login/presentation/manager/login_cubit/login_state.dart';
 import 'package:printing_costs_2/features/login/presentation/views/login_screen.dart';
@@ -68,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
       widget.repository.login = state.login;
       return LoadFinance(repository: widget.repository,);
     }  else {
-    return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+    return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
     }
             },
 
@@ -107,7 +105,7 @@ class _LoadFinanceState extends State<LoadFinance> {
           } else if (state is FinanceListFailure) {
             return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
           } else {
-            return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+            return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
           }
         },
       );
@@ -141,7 +139,7 @@ class _LoadOtherState extends State<LoadOther> {
         } else if (state is OtherListFailure) {
         return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
         } else {
-        return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+        return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
         }
       },
     );
@@ -168,13 +166,13 @@ class _LoadMaterialsState extends State<LoadMaterials> {
     return BlocBuilder<MaterialsCubit, MaterialListState>(
       builder: (context, state) {
         if (state is MaterialListSuccess) {
-          debugPrint(state.material[0].toString());
+          // debugPrint(state.material.toString());
           widget.repository.materials = state.material;
           return LoadPrinters(repository: widget.repository,);
         } else if (state is MaterialListFailure) {
           return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
         } else {
-          return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+          return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
         }
       },
     );
@@ -202,7 +200,7 @@ class _LoadPrintersState extends State<LoadPrinters> {
     return BlocBuilder<PrintersCubit, PrinterListState>(
       builder: (context, state) {
         if (state is PrinterListSuccess) {
-          debugPrint(state.printer[0].toString());
+          // debugPrint(state.printer[0].toString());
           widget.repository.printers = state.printer;
           return LoadUserMaterials(
             repository: widget.repository,
@@ -210,7 +208,7 @@ class _LoadPrintersState extends State<LoadPrinters> {
         } else if (state is PrinterListFailure) {
           return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
         } else {
-          return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+          return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
         }
       },
     );
@@ -255,7 +253,7 @@ class _LoadUserMaterialsState extends State<LoadUserMaterials> {
           if (state is MaterialUserListFailure) {
           return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
         } else if (state is MaterialUserListLoading){
-          return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+          return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
         } else {
           return Container();
         }
@@ -286,7 +284,7 @@ class _LoadUserPrintersState extends State<LoadUserPrinters> {
     return BlocBuilder<PrintersUserCubit, PrinterUserListState>(
       builder: (context, state) {
         if (state is PrinterUserListSuccessS) {
-          debugPrint(state.printer[0].toString());
+          // debugPrint(state.printer[0].toString());
           widget.repository.userprinters = state.printer;
           return SplashViewbody(
             repository: widget.repository,
@@ -295,7 +293,7 @@ class _LoadUserPrintersState extends State<LoadUserPrinters> {
           return Container(color: Colors.white, child: Align(alignment:Alignment.center,child: Text(state.errMessage)));
         } else if(state is PrinterUserListLoading){
           print("44444444");
-          return Container(color: Colors.white,child: SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
+          return Container(color: Colors.white,child: const SizedBox(width:25,height:25,child:Align(alignment: Alignment.center,child: CircularProgressIndicator(color: Colors.blue,))));
         }else{
           return Container();
         }

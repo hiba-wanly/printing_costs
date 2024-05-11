@@ -4,7 +4,6 @@ import 'package:printing_costs_2/core/widgets/app_bar.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
 import 'package:printing_costs_2/core/widgets/text_style.dart';
 import 'package:printing_costs_2/features/home/presentation/views/start_screen.dart';
-import 'package:printing_costs_2/features/materials/data/models/material_model.dart';
 import 'package:printing_costs_2/features/materials/data/models/user_material_model.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_cubit.dart';
 import 'package:printing_costs_2/features/materials/presentation/manager/material_cubit/material_state.dart';
@@ -20,7 +19,7 @@ class MaterialView extends StatefulWidget {
 }
 
 class _MaterialViewState extends State<MaterialView> {
-  TextEditingController materialController = new TextEditingController();
+  TextEditingController materialController = TextEditingController();
 
 
   List<UserMaterials>? usermaterials ;
@@ -50,7 +49,7 @@ class _MaterialViewState extends State<MaterialView> {
                       left: w * 0.01, right: w * 0.01, top: h * 0.01,bottom: h * 0.01),
                   itemCount: usermaterials!.length,
                   shrinkWrap: true,
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   itemBuilder: (BuildContext context,int index)=>
                       Column(
                         children: [
@@ -76,7 +75,7 @@ class _MaterialViewState extends State<MaterialView> {
 
                                         TEXT(text:usermaterials![index].brand! +"   ",w:w*0.04),
                                         TEXT(text:usermaterials![index].color! +"   ",w:w*0.04),
-                                        TEXT(text:usermaterials![index].material! +"   ",w:w*0.04),
+                                        TEXT(text:"${usermaterials![index].material!}   ",w:w*0.04),
                                       ],
                                     ),
                                     SizedBox(height: h*0.01,),
@@ -118,11 +117,20 @@ class _MaterialViewState extends State<MaterialView> {
                                                   widget.repository.usermaterials = state.material;
                                                 });
                                                 widget.repository.usermaterials = state.material;
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => StartScreen(
+                                                      repository: widget.repository,
+                                                    ),
+                                                  ),
+                                                );
                                                 // return Navigator.of(context).pop();
                                                 // StartScreen(
                                                 //   repository: widget.repository,
                                                 // );
                                               } else if (state is MaterialListFailure) {
+                                                FlashBAR(message: state.errMessage,h: h,context1: context,);
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -132,7 +140,7 @@ class _MaterialViewState extends State<MaterialView> {
                                                   ),
                                                 );
                                                 // Navigator.of(context).pop();
-                                                FlashBAR(message: state.errMessage,h: h,context1: context,);
+
                                               }
                                             },
                                             builder: (context,state){
@@ -140,40 +148,40 @@ class _MaterialViewState extends State<MaterialView> {
                                                 return Container(
                                                   width: double.infinity,
                                                   height: h * 0.06,
-
-                                                  child: Align(
-                                                      alignment: Alignment.center,
-                                                      child: CircularProgressIndicator()),
                                                   decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(5),
-                                                      gradient: LinearGradient(
+                                                      gradient: const LinearGradient(
                                                         colors: [Colors.lightBlueAccent, Colors.deepPurple],
                                                         begin: Alignment.bottomLeft,
                                                         end: Alignment.topRight,
                                                         stops: [0.2, 0.8],
                                                         tileMode: TileMode.repeated,
                                                       )),
+
+                                                  child: const Align(
+                                                      alignment: Alignment.center,
+                                                      child: CircularProgressIndicator()),
                                                 );
                                               }else{
                                                return GestureDetector(
                                                   onTap: () {
-                                                    BlocProvider.of<MaterialsCubit>(context).deleteMaterialList(usermaterials![index].id);
+                                                    BlocProvider.of<MaterialsCubit>(context).deleteMaterialList(usermaterials![index].id,widget.repository.login!.id);
                                                   },
                                                   child: Container(
                                                     width: double.infinity,
                                                     height: h * 0.06,
-                                                    child: Align(
-                                                        alignment: Alignment.center,
-                                                        child: TEXT(text:"حذف",w: w * 0.035)),
                                                     decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(5),
-                                                        gradient: LinearGradient(
+                                                        gradient: const LinearGradient(
                                                           colors: [Colors.blue, Colors.deepPurple],
                                                           begin: Alignment.bottomLeft,
                                                           end: Alignment.topRight,
                                                           stops: [0.2, 0.8],
                                                           tileMode: TileMode.repeated,
                                                         )),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: TEXT(text:"حذف",w: w * 0.035)),
                                                   ),
                                                 );
                                               }
@@ -201,18 +209,18 @@ class _MaterialViewState extends State<MaterialView> {
                                             child: Container(
                                               width: double.infinity,
                                               height: h * 0.06,
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: TEXT(text:"تعديل",w: w * 0.035)),
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(5),
-                                                  gradient: LinearGradient(
+                                                  gradient: const LinearGradient(
                                                     colors: [Colors.blue, Colors.deepPurple],
                                                     begin: Alignment.bottomLeft,
                                                     end: Alignment.topRight,
                                                     stops: [0.2, 0.8],
                                                     tileMode: TileMode.repeated,
                                                   )),
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: TEXT(text:"تعديل",w: w * 0.035)),
                                             ),
                                           ),
                                         ),
@@ -246,10 +254,10 @@ class _MaterialViewState extends State<MaterialView> {
             ),
           );
         },
-        child: Icon(
+        backgroundColor: const Color(0xff4f8ea8),
+        child: const Icon(
             Icons.add
         ),
-        backgroundColor: Color(0xff4f8ea8),
       ),
     );
   }
