@@ -1,4 +1,5 @@
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +48,7 @@ class _StartScreenState extends State<StartScreen>
 
   List<String> OrderList = [
     "فاتورة",
-    " سعر"
+    "سعر"
   ];
 
   TextEditingController sizeController = TextEditingController();
@@ -407,6 +408,8 @@ class _StartScreenState extends State<StartScreen>
                                       membership: widget.repository.check2!,
                                       gain: widget.repository.other!.cost_gain,
                                       risk: widget.repository.other!.cost_risk,
+                                      material_costs: double.parse(sizeController.text)  * selectmaterialMM!.cost_per_One ,
+                                      owner: selectmaterialMM!.owner,
                                     );
                                     BlocProvider.of<HomeCubit>(context).fetchHome(home);
                                     debugPrint(selectedOrder);
@@ -442,9 +445,16 @@ class _StartScreenState extends State<StartScreen>
                           });
                         }
                         else if (state is HomeFailure){
-                          FlashBAR(
-                            message: state.errMessage, h: h,context1: context,
-                          );
+                          Flushbar(
+                            duration: const Duration(seconds: 3),
+                            backgroundColor: Colors.white,
+                            messageColor: Colors.black,
+                            messageSize: h * 0.02,
+                            message: state.errMessage,
+                          ).show(context);
+                          // FlashBAR(
+                          //   message: state.errMessage, h: h,context1: context,
+                          // );
                         }
                       }
                   ),

@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/flush_bar.dart';
@@ -84,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                      listener: (context, state) {
                        if (state is LoginSuccess) {
                          widget.repository.login = state.login;
+
                          Navigator.push(
                              context,
                              MaterialPageRoute(
@@ -96,7 +98,14 @@ class _LoginScreenState extends State<LoginScreen> {
                        }
                        if(state is LoginFailure){
                          debugPrint("kkkLoginFailure");
-                         FlashBAR(message: state.errMessage,h: h,context1: context,);
+                         Flushbar(
+                           duration: const Duration(seconds: 3),
+                           backgroundColor: Colors.white,
+                           messageColor: Colors.black,
+                           messageSize: h * 0.02,
+                           message: state.errMessage,
+                         ).show(context);
+                         // FlashBAR(message: state.errMessage,h: h,context1: context,);
                          // Navigator.pop(context);
                        }
                      }, builder: (context, state) {

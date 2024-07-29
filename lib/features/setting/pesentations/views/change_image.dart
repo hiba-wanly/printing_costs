@@ -96,25 +96,25 @@ class _ChangeImageState extends State<ChangeImage> {
         widget.repository.login= state.login;
       // });
 
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) =>
-        StartScreen(
-    repository: widget.repository,
-    )
-    )
-    );
-    }
-    if(state is ImageFailure){
-      Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  StartScreen(
-                    repository: widget.repository,
-                  )
-          )
+            builder: (context) => StartScreen(
+              repository: widget.repository,
+            ),
+          ),
+          ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
+        );
+    }
+    if(state is ImageFailure){
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StartScreen(
+            repository: widget.repository,
+          ),
+        ),
+        ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
       );
     }
     }, builder: (context, state) {

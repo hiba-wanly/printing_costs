@@ -8,5 +8,5 @@ abstract class MaterialRepo{
   Future<Either<ServerFailure,List<UserMaterials>>> fetchUserMaterialList(int id);
   Future<Either<ServerFailure,List<UserMaterials>>> updateMaterialList(Map<String,dynamic> data2,int id, int ui);
   Future<Either<ServerFailure,List<UserMaterials>>> deleteMaterialList(int id, int ui);
-  Future<Either<ServerFailure,List<UserMaterials>>> addMaterialList(int id,int userid);
+  Future<Either<ServerFailure,List<UserMaterials>>> addMaterialList(int id,int userid,String owner);
 }

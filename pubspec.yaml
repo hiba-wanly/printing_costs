@@ -53,6 +53,7 @@ dependencies:
   hive:
   hive_flutter:
   image_picker:
+  awesome_dialog:
 
 
 dev_dependencies:

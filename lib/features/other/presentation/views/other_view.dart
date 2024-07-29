@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
@@ -92,16 +93,24 @@ class _OtherViewState extends State<OtherView> {
               //   repository: widget.repository,
               // );
             } else if (state is OtherListFailure) {
-              Navigator.push(
+              Flushbar(
+                duration: const Duration(seconds: 3),
+                backgroundColor: Colors.white,
+                messageColor: Colors.black,
+                messageSize: h * 0.02,
+                message: state.errMessage,
+              ).show(context);
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => StartScreen(
                     repository: widget.repository,
                   ),
                 ),
+                ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
               );
               // Navigator.of(context).pop();
-              FlashBAR(message: state.errMessage,h: h,context1: context,);
+              // FlashBAR(message: state.errMessage,h: h,context1: context,);
             }
           },
           builder: (context, state) {

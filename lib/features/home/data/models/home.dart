@@ -15,6 +15,8 @@ class Home{
   dynamic membership;
   dynamic gain;
   dynamic risk;
+  dynamic material_costs;
+  dynamic owner;
 
   Home({
     this.username,
@@ -32,7 +34,9 @@ class Home{
     required this.supervisor,
     required this.membership,
     this.gain,
-    this.risk
+    this.risk,
+    this.material_costs,
+    this.owner,
 });
 
   Map<String,dynamic> toJson(){
@@ -53,6 +57,8 @@ class Home{
       "membership":membership,
       "gain":gain,
       "risk":risk,
+      "material_costs":material_costs,
+      "owner":owner
     };
   }
 

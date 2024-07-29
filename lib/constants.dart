@@ -8,4 +8,4 @@ const kLoginBox = 'login_box';
 const kUserMaterialBox = 'user_material_box';
 const kUserPrinterBox = 'user_printer_box';
 
-String baseUrl = 'http://192.168.43.59:8000/media/';
+String baseUrl = 'http://213.199.32.188:8050/media/';

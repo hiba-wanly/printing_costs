@@ -49,7 +49,7 @@ class TotoalCosts{
     debugPrint(total1.toString());
 
 
-    double total = total1 * ( 1+costmumber + costRisk); ///cost_risk * costmumber;///update it to tottal1 * (1+ cost_risk + costmumber) old = total1 * cost_risk * (1+costmumber)
+    double total = total1 * ( 1+ costmumber + costRisk); ///cost_risk * costmumber;///update it to tottal1 * (1+ cost_risk + costmumber) old = total1 * cost_risk * (1+costmumber)
     debugPrint("تكلفة نهائية");
     debugPrint(total.toString());
 

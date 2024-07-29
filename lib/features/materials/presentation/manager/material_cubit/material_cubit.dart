@@ -67,12 +67,12 @@ class MaterialsCubit extends Cubit<MaterialListState>{
     });
   }
 
-  Future<void> addMaterialList(int id, int userid) async{
+  Future<void> addMaterialList(int id, int userid, String owner) async{
     emit(MaterialListLoading());
     // Map<String,dynamic> data2 = materials.toJson();
     debugPrint("addMateriallllllll");
     // debugPrint(data2.toString());
-    var result = await  fetchUserMaterialUseCase.callAdd(id,userid);
+    var result = await  fetchUserMaterialUseCase.callAdd(id,userid,owner);
 
     result.fold((failure) {
 

@@ -16,7 +16,7 @@ class FetchMaterialUseCase extends UseCase<List<Materials>,NoParam> {
   }
 
   @override
-  Future<Either<Failure, List<Materials>>> callAdd( int id, int userid, [NoParam? param]) {
+  Future<Either<Failure, List<Materials>>> callAdd( int id, int userid,String owner, [NoParam? param]) {
     // TODO: implement callAdd
     throw UnimplementedError();
   }
@@ -61,8 +61,8 @@ class FetchUserMaterialUseCase extends UseCase<List<UserMaterials>,NoParam> {
     return await materialRepo.deleteMaterialList( id,ui);
   }
   @override
-  Future<Either<Failure, List<UserMaterials>>> callAdd(int id, int userid,[NoParam? param]) async{
-    return await materialRepo.addMaterialList(id,userid);
+  Future<Either<Failure, List<UserMaterials>>> callAdd(int id, int userid,String owner,[NoParam? param]) async{
+    return await materialRepo.addMaterialList(id,userid,owner);
   }
 
   @override

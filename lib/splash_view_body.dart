@@ -71,13 +71,14 @@ with SingleTickerProviderStateMixin{
         //     duration: kTranstionDuration);
 
         // GoRouter.of(context).push(AppRouter.kHomeView);
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => StartScreen(
                   repository: widget.repository,
                 ),
               ),
+              ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
             );
       },
     );

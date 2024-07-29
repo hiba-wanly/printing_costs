@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
@@ -23,7 +24,7 @@ class _MaterialViewState extends State<MaterialView> {
 
 
   List<UserMaterials>? usermaterials ;
-
+  var select ;
   @override
   Widget build(BuildContext context) {
     usermaterials = widget.repository.usermaterials;
@@ -117,34 +118,43 @@ class _MaterialViewState extends State<MaterialView> {
                                                   widget.repository.usermaterials = state.material;
                                                 });
                                                 widget.repository.usermaterials = state.material;
-                                                Navigator.push(
+                                                Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) => StartScreen(
                                                       repository: widget.repository,
                                                     ),
                                                   ),
+                                                  ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
                                                 );
                                                 // return Navigator.of(context).pop();
                                                 // StartScreen(
                                                 //   repository: widget.repository,
                                                 // );
                                               } else if (state is MaterialListFailure) {
-                                                FlashBAR(message: state.errMessage,h: h,context1: context,);
-                                                Navigator.push(
+                                                Flushbar(
+                                                  duration: const Duration(seconds: 3),
+                                                  backgroundColor: Colors.white,
+                                                  messageColor: Colors.black,
+                                                  messageSize: h * 0.02,
+                                                  message: state.errMessage,
+                                                ).show(context);
+                                                // FlashBAR(message: state.errMessage,h: h,context1: context,);
+                                                Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) => StartScreen(
                                                       repository: widget.repository,
                                                     ),
                                                   ),
+                                                  ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
                                                 );
                                                 // Navigator.of(context).pop();
 
                                               }
                                             },
                                             builder: (context,state){
-                                              if (state is MaterialListLoading){
+                                              if (state is MaterialListLoading && select == index){
                                                 return Container(
                                                   width: double.infinity,
                                                   height: h * 0.06,
@@ -165,6 +175,9 @@ class _MaterialViewState extends State<MaterialView> {
                                               }else{
                                                return GestureDetector(
                                                   onTap: () {
+                                                    setState((){
+                                                      select = index;
+                                                    });
                                                     BlocProvider.of<MaterialsCubit>(context).deleteMaterialList(usermaterials![index].id,widget.repository.login!.id);
                                                   },
                                                   child: Container(
@@ -195,6 +208,7 @@ class _MaterialViewState extends State<MaterialView> {
                                         Expanded(
                                           child: GestureDetector(
                                             onTap: () {
+
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

@@ -65,11 +65,11 @@ class MaterialRepoImpl extends MaterialRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<UserMaterials>>> addMaterialList(int id,int userid)async {
+  Future<Either<ServerFailure, List<UserMaterials>>> addMaterialList(int id,int userid,String owner)async {
     try {
       debugPrint("ADDMATERIALLLLLLL");
       List<UserMaterials> nums;
-      nums= await materialRemoteDataSource.addMaterialList(id,userid);
+      nums= await materialRemoteDataSource.addMaterialList(id,userid,owner);
       return right(nums);
     }   catch (e) {
       if(e is DioError){

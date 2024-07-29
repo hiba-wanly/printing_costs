@@ -10,7 +10,7 @@ abstract class MaterialRemoteDataSource{
   Future<List<Materials>> fetchMaterialList();
   Future<List<UserMaterials>> fetchUserMaterialList(int id);
   Future<List<UserMaterials>> updateMaterialList(dynamic id,Map<String,dynamic> data1, int ui) ;
-  Future<List<UserMaterials>> addMaterialList(int id,int userid) ;
+  Future<List<UserMaterials>> addMaterialList(int id,int userid,String owner) ;
   Future<List<UserMaterials>> deleteMaterialList(dynamic id, int ui) ;
 }
 
@@ -43,9 +43,9 @@ class MaterialRemoteDataSourceImpl extends MaterialRemoteDataSource{
   }
 
   @override
-  Future<List<UserMaterials>> addMaterialList(int id,int userid) async{
+  Future<List<UserMaterials>> addMaterialList(int id,int userid,String owner) async{
     debugPrint("M1");
-    var data = await apiService.post(endPoint: 'usermaterial/add/$id/$userid',data1: {});
+    var data = await apiService.post(endPoint: 'usermaterial/add/$id/$userid',data1: {"owner":owner});
     debugPrint("M2");
     debugPrint(data.toString());
     List<UserMaterials> nums = getUserMaterialList(data);

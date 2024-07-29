@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_costs_2/core/widgets/app_bar.dart';
@@ -59,21 +60,47 @@ class _FinanceViewState extends State<FinanceView>  {
                     if (state is FinanceListSuccess) {
                       debugPrint(state.finance.toString());
                       widget.repository.finance = state.finance;
-                      return Navigator.of(context).pop();
+                      // return Navigator.of(context).pop();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                          MaterialPageRoute(
+                            builder: (context) => StartScreen(
+                              repository: widget.repository,
+                            ),
+                          ),
+                        ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
+                      );
                       // StartScreen(
                       //   repository: widget.repository,
                       // );
                     } else if (state is FinanceListFailure) {
-                      Navigator.push(
+                      Flushbar(
+                        duration: const Duration(seconds: 3),
+                        backgroundColor: Colors.white,
+                        messageColor: Colors.black,
+                        messageSize: h * 0.02,
+                        message: state.errMessage,
+                      ).show(context);
+                      Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => StartScreen(
-                            repository: widget.repository,
+                          MaterialPageRoute(
+                            builder: (context) => StartScreen(
+                              repository: widget.repository,
+                            ),
                           ),
-                        ),
+                        ModalRoute.withName('/homeView'), // Replace this with your root screen's route name (usually '/')
                       );
+
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => StartScreen(
+                      //       repository: widget.repository,
+                      //     ),
+                      //   ),
+                      // );
                       // Navigator.of(context).pop();
-                      FlashBAR(message: state.errMessage,h: h,context1: context,);
+                      // FlashBAR(message: state.errMessage,h: h,context1: context,);
                     }
                   },
                   builder: (context, state) {

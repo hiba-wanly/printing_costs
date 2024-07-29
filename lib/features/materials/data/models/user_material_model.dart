@@ -14,13 +14,16 @@ class UserMaterials{
   @HiveField(4)
   dynamic  number_of_units;//عدد الواحدات
   @HiveField(5)
-  dynamic cost_per_One;
+  dynamic cost_per_One;// تكلفة الواحدة
   @HiveField(6)
-  dynamic userid; // تكلفة الواحدة
+  dynamic userid;
   @HiveField(7)
   dynamic color;
   @HiveField(8)
   dynamic brand;
+  @HiveField(9)
+  dynamic owner;
+
 
   UserMaterials({
     this.id,
@@ -30,7 +33,8 @@ class UserMaterials{
     required this.number_of_units,
     this.cost_per_One,
     this.color,
-    this.brand
+    this.brand,
+    this.owner
     // required this.cost_per_one
   });
 
@@ -44,6 +48,7 @@ class UserMaterials{
       "number_of_units":number_of_units,
       "color":color,
       "brand":brand,
+      "owner":owner,
       // "cost_per_One":this.cost_per_One,//cost_per_one()
     };
   }
@@ -58,6 +63,7 @@ class UserMaterials{
     userid = json['user'];
     color=json['color'];
     brand=json['brand'];
+    owner=json['owner'];
   }
 
 }
