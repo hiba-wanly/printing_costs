@@ -42,7 +42,7 @@ dependencies:
   path_provider:
   clay_containers:
   shared_preferences:
-  file_picker: ^6.1.1
+#  file_picker: ^6.1.1
   dotted_border: ^2.1.0
   iconsax: ^0.0.8
   bloc:
