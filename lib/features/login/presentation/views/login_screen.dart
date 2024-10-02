@@ -61,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                      BoxLogin(
                          controller: emailController,
                         label: 'الحساب',
-                         textInputType: TextInputType.emailAddress,
+                         textInputType: TextInputType.
+                         emailAddress,
                        pass: false,
                        ispassword: ispassword,
                      ),

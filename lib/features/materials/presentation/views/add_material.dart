@@ -297,6 +297,8 @@ class _AddMaterialState extends State<AddMaterial> {
                                                       setState(() {
                                                         select = index;
                                                       });
+                                                      debugPrint(ownerController
+                                                          .text);
                                                       BlocProvider.of<
                                                                   MaterialsCubit>(
                                                               context)

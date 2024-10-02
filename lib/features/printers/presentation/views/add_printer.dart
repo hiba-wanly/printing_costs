@@ -136,7 +136,7 @@ class _AddPrintersState extends State<AddPrinters>  {
                                               backgroundColor: Colors.white,
                                               messageColor: Colors.black,
                                               messageSize: h * 0.02,
-                                              message: "تمت اضافة الطابعة",
+                                              message: "لا يمكن اضافة الطابعة",
                                             ).show(context);
                                             Navigator.pushAndRemoveUntil(
                                               context,

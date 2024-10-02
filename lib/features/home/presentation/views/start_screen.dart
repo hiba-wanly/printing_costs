@@ -48,7 +48,7 @@ class _StartScreenState extends State<StartScreen>
 
   List<String> OrderList = [
     "فاتورة",
-    "سعر"
+    "عرض سعر "
   ];
 
   TextEditingController sizeController = TextEditingController();
@@ -130,7 +130,7 @@ class _StartScreenState extends State<StartScreen>
     materials2 = widget.repository.usermaterials
         ?.map((e) => DropdownMenuItem<int>(
       value: e.id,
-      child: TEXT(text:e.material!,w: w * 0.035),
+      child: TEXT(text:e.material!+ " "+e.brand! +" "+ e.color!,w: w * 0.035),
     ))
         .toList();
     orderTypeList = OrderList.map((e) => DropdownMenuItem<String>(

@@ -71,7 +71,7 @@ class MaterialsCubit extends Cubit<MaterialListState>{
     emit(MaterialListLoading());
     // Map<String,dynamic> data2 = materials.toJson();
     debugPrint("addMateriallllllll");
-    // debugPrint(data2.toString());
+    debugPrint(owner.toString());
     var result = await  fetchUserMaterialUseCase.callAdd(id,userid,owner);
 
     result.fold((failure) {

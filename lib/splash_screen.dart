@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
           },
       builder: (context, state) {
     if (state is LoginSuccess) {
-      debugPrint(state.login.id.toString());
+      // debugPrint(state.login.id.toString());
       widget.repository.login = state.login;
       return LoadFinance(repository: widget.repository,);
     }  else {
@@ -99,7 +99,7 @@ class _LoadFinanceState extends State<LoadFinance> {
       BlocBuilder<FinanceCubit, FinanceListState>(
         builder: (context, state) {
           if (state is FinanceListSuccess) {
-            debugPrint(state.finance.num.toString());
+            // debugPrint(state.finance.num.toString());
             widget.repository.finance = state.finance;
             return LoadOther(repository: widget.repository,);
           } else if (state is FinanceListFailure) {
@@ -133,7 +133,7 @@ class _LoadOtherState extends State<LoadOther> {
     return BlocBuilder<OtherCubit, OtherListState>(
       builder: (context, state) {
         if (state is OtherListSuccess) {
-          debugPrint(state.other.toString());
+          // debugPrint(state.other.toString());
           widget.repository.other = state.other;
           return LoadMaterials(repository: widget.repository);
         } else if (state is OtherListFailure) {
